@@ -155,19 +155,22 @@ function Header( {
 					 */
 					<PostSavedState forceIsDirty={ forceIsDirty } />
 				) }
+
 				<PostViewLink />
-				{ canBeZoomedOut && isEditorIframed && isWideViewport && (
-					<ZoomOutToggle disabled={ forceDisableBlockTools } />
-				) }
 
 				<PreviewDropdown
 					forceIsAutosaveable={ forceIsDirty }
 					disabled={ disablePreviewOption }
 				/>
+
 				<PostPreviewButton
 					className="editor-header__post-preview-button"
 					forceIsAutosaveable={ forceIsDirty }
 				/>
+
+				{ canBeZoomedOut && isEditorIframed && isWideViewport && (
+					<ZoomOutToggle disabled={ forceDisableBlockTools } />
+				) }
 
 				{ ( isWideViewport || ! showIconLabels ) && (
 					<PinnedItems.Slot scope="core" />
