@@ -1,12 +1,13 @@
 /**
  * WordPress dependencies
  */
-import { PanelBody, ToggleControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 export default function LoginOutEdit( { attributes, setAttributes } ) {
-	const { displayLoginAsForm, redirectToCurrent } = attributes;
+	const { displayLoginAsForm, redirectToCurrent, loginText, logoutText } =
+		attributes;
 
 	return (
 		<>
@@ -32,6 +33,28 @@ export default function LoginOutEdit( { attributes, setAttributes } ) {
 							} )
 						}
 					/>
+					<TextControl
+						label={ __( 'Login Text' ) }
+						value={ loginText }
+						onChange={ ( value ) =>
+							setAttributes( { loginText: value } )
+						}
+						placeholder={ __( 'Enter login text' ) }
+						help={ __( 'Customize the text for the login.' ) }
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+					/>
+					<TextControl
+						label={ __( 'Logout Text' ) }
+						value={ logoutText }
+						onChange={ ( value ) =>
+							setAttributes( { logoutText: value } )
+						}
+						placeholder={ __( 'Enter logout text' ) }
+						help={ __( 'Customize the text for the logout.' ) }
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div
@@ -39,7 +62,7 @@ export default function LoginOutEdit( { attributes, setAttributes } ) {
 					className: 'logged-in',
 				} ) }
 			>
-				<a href="#login-pseudo-link">{ __( 'Log out' ) }</a>
+				<a href="#login-pseudo-link">{ logoutText }</a>
 			</div>
 		</>
 	);
