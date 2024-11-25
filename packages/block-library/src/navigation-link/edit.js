@@ -15,6 +15,7 @@ import {
 	ToolbarButton,
 	Tooltip,
 	ToolbarGroup,
+	ToggleControl,
 } from '@wordpress/components';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import { __ } from '@wordpress/i18n';
@@ -159,9 +160,19 @@ function getMissingText( type ) {
  * Consider reuseing this components for both blocks.
  */
 function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
-	const { label, url, description, title, rel } = attributes;
+	const { label, url, description, title, rel, opensInNewTab } = attributes;
 	return (
 		<PanelBody title={ __( 'Settings' ) }>
+			<ToggleControl
+				__nextHasNoMarginBottom
+				label={ __( 'Open in new tab' ) }
+				help={ __( 'The link will open in a new tab when clicked.' ) }
+				checked={ opensInNewTab }
+				onChange={ () =>
+					setAttributes( { opensInNewTab: ! opensInNewTab } )
+				}
+			/>
+
 			<TextControl
 				__nextHasNoMarginBottom
 				__next40pxDefaultSize
