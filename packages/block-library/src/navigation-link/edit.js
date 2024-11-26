@@ -163,16 +163,6 @@ function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
 	const { label, url, description, title, rel, opensInNewTab } = attributes;
 	return (
 		<PanelBody title={ __( 'Settings' ) }>
-			<ToggleControl
-				__nextHasNoMarginBottom
-				label={ __( 'Open in new tab' ) }
-				help={ __( 'The link will open in a new tab when clicked.' ) }
-				checked={ opensInNewTab }
-				onChange={ () =>
-					setAttributes( { opensInNewTab: ! opensInNewTab } )
-				}
-			/>
-
 			<TextControl
 				__nextHasNoMarginBottom
 				__next40pxDefaultSize
@@ -198,6 +188,15 @@ function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
 				} }
 				label={ __( 'Link' ) }
 				autoComplete="off"
+			/>
+			<ToggleControl
+				__nextHasNoMarginBottom
+				label={ __( 'Open in new tab' ) }
+				help={ __( 'The link will open in a new tab when clicked.' ) }
+				checked={ opensInNewTab }
+				onChange={ () =>
+					setAttributes( { opensInNewTab: ! opensInNewTab } )
+				}
 			/>
 			<TextareaControl
 				__nextHasNoMarginBottom
