@@ -25,6 +25,7 @@ export default ( props ) => ( element ) => {
 			__unstableEmbedURLOnPaste,
 			preserveWhiteSpace,
 			pastePlainText,
+			disableLineBreaks,
 		} = props.current;
 
 		// The event listener is attached to the window, so we need to check if
@@ -37,9 +38,14 @@ export default ( props ) => ( element ) => {
 			return;
 		}
 
-		const { plainText, html } = getPasteEventData( event );
+		let { plainText, html } = getPasteEventData( event );
 
 		event.preventDefault();
+
+		// When line breaks are disabled, convert all line breaks to a single space.
+		plainText = disableLineBreaks
+			? plainText.replace( /\r?\n/g, ' ' ).trim()
+			: plainText;
 
 		// Allows us to ask for this information when we get a report.
 		window.console.log( 'Received HTML:\n\n', html );
