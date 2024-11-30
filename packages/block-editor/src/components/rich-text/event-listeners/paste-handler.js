@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { pasteHandler } from '@wordpress/blocks';
-import { isEmpty, insert, create } from '@wordpress/rich-text';
+import { isEmpty, insert, create, replace } from '@wordpress/rich-text';
 import { isURL } from '@wordpress/url';
 
 /**
@@ -38,14 +38,9 @@ export default ( props ) => ( element ) => {
 			return;
 		}
 
-		let { plainText, html } = getPasteEventData( event );
+		const { plainText, html } = getPasteEventData( event );
 
 		event.preventDefault();
-
-		// When line breaks are disabled, convert all line breaks to a single space.
-		plainText = disableLineBreaks
-			? plainText.replace( /\r?\n/g, ' ' ).trim()
-			: plainText;
 
 		// Allows us to ask for this information when we get a report.
 		window.console.log( 'Received HTML:\n\n', html );
@@ -77,7 +72,12 @@ export default ( props ) => ( element ) => {
 			if ( transformed !== value ) {
 				onChange( transformed );
 			} else {
-				const valueToInsert = create( { html: content } );
+				let valueToInsert = create( { html: content } );
+
+				if ( disableLineBreaks ) {
+					valueToInsert = replace( valueToInsert, /\r?\n/g, ' ' );
+				}
+
 				addActiveFormats( valueToInsert, value.activeFormats );
 				onChange( insert( value, valueToInsert ) );
 			}
