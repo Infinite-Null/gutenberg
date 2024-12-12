@@ -8,17 +8,14 @@ import { box, button, cog, paragraph } from '@wordpress/icons';
  */
 import BlockCard from '../';
 
-/**
- * BlockCard component displays information about a block including its icon, title, and description.
- */
-const meta = {
+export default {
 	title: 'BlockEditor/BlockCard',
 	component: BlockCard,
 	parameters: {
 		docs: {
 			description: {
 				component:
-					'The BlockCard component allows to display a card which contains the title of a block, its icon and its description.',
+					'The `BlockCard` component allows to display a card which contains the title of a block, its icon and its description.',
 			},
 			canvas: { sourceState: 'shown' },
 		},
@@ -65,8 +62,6 @@ const meta = {
 		},
 	},
 };
-
-export default meta;
 
 /**
  * Default story shows the basic BlockCard with title, icon, name and description.
