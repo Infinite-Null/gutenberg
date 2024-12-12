@@ -3,17 +3,16 @@
  */
 import LetterSpacingControl from '../';
 
-/**
- * The LetterSpacingControl component renders a UnitControl for entering a numeric value with a unit (e.g., px, rem).
- */
-const meta = {
+export default {
 	title: 'BlockEditor/LetterSpacingControl',
 	component: LetterSpacingControl,
 	parameters: {
 		docs: {
 			canvas: { sourceState: 'shown' },
-			description:
-				'The `LetterSpacingControl` component renders a UnitControl that lets the user enter a numeric value and select a unit, for example px or rem.',
+			description: {
+				component:
+					'The `LetterSpacingControl` component renders a UnitControl that lets the user enter a numeric value and select a unit, for example `px` or `rem`.',
+			},
 		},
 	},
 	argTypes: {
@@ -63,8 +62,6 @@ const meta = {
 		},
 	},
 };
-
-export default meta;
 
 /**
  * Default story shows the LetterSpacingControl.
