@@ -12,10 +12,10 @@ import {
 	__experimentalUseBorderProps as useBorderProps,
 } from '@wordpress/block-editor';
 import {
-	PanelBody,
 	RangeControl,
 	ResizableBox,
 	ToggleControl,
+	__experimentalToolsPanel as ToolsPanel,
 } from '@wordpress/components';
 import { __, isRTL } from '@wordpress/i18n';
 import { addQueryArgs, removeQueryArgs } from '@wordpress/url';
@@ -23,7 +23,7 @@ import { addQueryArgs, removeQueryArgs } from '@wordpress/url';
 /**
  * Internal dependencies
  */
-import { useUserAvatar, useCommentAvatar } from './hooks';
+import { useCommentAvatar, useUserAvatar } from './hooks';
 import UserControl from './user-control';
 
 const AvatarInspectorControls = ( {
@@ -33,7 +33,12 @@ const AvatarInspectorControls = ( {
 	selectUser,
 } ) => (
 	<InspectorControls>
-		<PanelBody title={ __( 'Settings' ) }>
+		<ToolsPanel
+			label={ __( 'Settings' ) }
+			resetAll={ () => {
+				setAttributes( {} );
+			} }
+		>
 			<RangeControl
 				__nextHasNoMarginBottom
 				__next40pxDefaultSize
@@ -78,7 +83,7 @@ const AvatarInspectorControls = ( {
 					} }
 				/>
 			) }
-		</PanelBody>
+		</ToolsPanel>
 	</InspectorControls>
 );
 
