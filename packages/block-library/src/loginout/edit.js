@@ -1,9 +1,9 @@
 /**
  * WordPress dependencies
  */
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 export default function LoginOutEdit( { attributes, setAttributes } ) {
 	const { displayLoginAsForm, redirectToCurrent } = attributes;
