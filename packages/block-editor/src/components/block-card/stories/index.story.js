@@ -44,7 +44,11 @@ const meta = {
 				box,
 				button,
 			},
-			description: 'The icon to display for the block.',
+			description:
+				'The icon of the block. This can be any of [WordPress Dashicons](https://developer.wordpress.org/resource/dashicons/), or a custom `svg` element.',
+			table: {
+				type: { summary: 'string | object' },
+			},
 		},
 		name: {
 			control: 'text',
