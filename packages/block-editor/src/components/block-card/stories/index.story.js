@@ -8,14 +8,14 @@ import { box, button, cog, paragraph } from '@wordpress/icons';
  */
 import BlockCard from '../';
 
-export default {
+const meta = {
 	title: 'BlockEditor/BlockCard',
 	component: BlockCard,
 	parameters: {
 		docs: {
 			description: {
 				component:
-					'The `BlockCard` component allows to display a card which contains the title of a block, its icon and its description.',
+					'The `BlockCard` component allows to display a "card" which contains the title of a block, its icon and its description.',
 			},
 			canvas: { sourceState: 'shown' },
 		},
@@ -23,14 +23,14 @@ export default {
 	argTypes: {
 		title: {
 			control: 'text',
-			description: 'The title of the block',
+			description: 'The title of the block.',
 			table: {
 				type: { summary: 'string' },
 			},
 		},
 		description: {
 			control: 'text',
-			description: 'A description of the block functionality',
+			description: 'A description of the block functionality.',
 			table: {
 				type: { summary: 'string' },
 			},
@@ -44,18 +44,18 @@ export default {
 				box,
 				button,
 			},
-			description: 'The icon to display for the block',
+			description: 'The icon to display for the block.',
 		},
 		name: {
 			control: 'text',
-			description: 'Optional custom name for the block',
+			description: 'Optional custom name for the block.',
 			table: {
 				type: { summary: 'string' },
 			},
 		},
 		className: {
 			control: 'text',
-			description: 'Additional CSS class names',
+			description: 'Additional CSS class names.',
 			table: {
 				type: { summary: 'string' },
 			},
@@ -63,9 +63,8 @@ export default {
 	},
 };
 
-/**
- * Default story shows the basic BlockCard with title, icon, name and description.
- */
+export default meta;
+
 export const Default = {
 	args: {
 		title: 'Paragraph',
