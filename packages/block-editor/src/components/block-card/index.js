@@ -27,6 +27,35 @@ import { unlock } from '../../lock-unlock';
 
 const { Badge } = unlock( componentsPrivateApis );
 
+/**
+ * A card component that displays block information including title, icon, and description.
+ * Can be used to show block metadata and navigation controls for parent blocks.
+ *
+ * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/block-editor/src/components/block-card/README.md
+ *
+ * @example
+ * ```jsx
+ * function Example() {
+ *   return (
+ *     <BlockCard
+ *       title="My Block"
+ *       icon="smiley"
+ *       description="A simple block example"
+ *       name="Custom Block"
+ *     />
+ *   );
+ * }
+ * ```
+ *
+ * @param {Object}        props             Component props.
+ * @param {string}        props.title       The title of the block.
+ * @param {string|Object} props.icon        Block icon component or string identifier.
+ * @param {string}        props.description Optional description of the block.
+ * @param {Object}        [props.blockType] Deprecated: Object containing block type data.
+ * @param {string}        [props.className] Additional classes to apply to the card.
+ * @param {string}        [props.name]      Custom block name to display before the title.
+ * @return {Element}                          Block card component.
+ */
 function BlockCard( { title, icon, description, blockType, className, name } ) {
 	if ( blockType ) {
 		deprecated( '`blockType` property in `BlockCard component`', {
