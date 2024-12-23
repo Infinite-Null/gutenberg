@@ -77,3 +77,11 @@ export const Default = {
 		__unstableInputWidth: '100px',
 	},
 };
+
+export const UnconstrainedWidth = {
+	...Default,
+	args: {
+		...Default.args,
+		__unstableInputWidth: '100%',
+	},
+};
