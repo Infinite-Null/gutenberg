@@ -49,12 +49,12 @@ const { Badge } = unlock( componentsPrivateApis );
  *
  * @param {Object}        props             Component props.
  * @param {string}        props.title       The title of the block.
- * @param {string|Object} props.icon        Block icon component or string identifier.
- * @param {string}        props.description Optional description of the block.
+ * @param {string|Object} props.icon        The icon of the block. This can be any of[WordPress Dashicons](https://developer.wordpress.org/resource/dashicons/), or a custom `svg` element.
+ * @param {string}        props.description The description of the block.
  * @param {Object}        [props.blockType] Deprecated: Object containing block type data.
  * @param {string}        [props.className] Additional classes to apply to the card.
  * @param {string}        [props.name]      Custom block name to display before the title.
- * @return {Element}                          Block card component.
+ * @return {Element} 						Block card component.
  */
 function BlockCard( { title, icon, description, blockType, className, name } ) {
 	if ( blockType ) {
