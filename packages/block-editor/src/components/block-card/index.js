@@ -6,24 +6,24 @@ import clsx from 'clsx';
 /**
  * WordPress dependencies
  */
-import deprecated from '@wordpress/deprecated';
 import {
 	Button,
 	__experimentalText as Text,
 	__experimentalVStack as VStack,
 	privateApis as componentsPrivateApis,
 } from '@wordpress/components';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { __, _x, isRTL, sprintf } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
+import deprecated from '@wordpress/deprecated';
 import { createInterpolateElement } from '@wordpress/element';
+import { __, _x, isRTL, sprintf } from '@wordpress/i18n';
+import { chevronLeft, chevronRight } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import BlockIcon from '../block-icon';
-import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
+import { store as blockEditorStore } from '../../store';
+import BlockIcon from '../block-icon';
 
 const { Badge } = unlock( componentsPrivateApis );
 
@@ -49,12 +49,12 @@ const { Badge } = unlock( componentsPrivateApis );
  *
  * @param {Object}        props             Component props.
  * @param {string}        props.title       The title of the block.
- * @param {string|Object} props.icon        The icon of the block. This can be any of[WordPress Dashicons](https://developer.wordpress.org/resource/dashicons/), or a custom `svg` element.
+ * @param {string|Object} props.icon        The icon of the block. This can be any of [WordPress' Dashicons](https://developer.wordpress.org/resource/dashicons/), or a custom `svg` element.
  * @param {string}        props.description The description of the block.
  * @param {Object}        [props.blockType] Deprecated: Object containing block type data.
  * @param {string}        [props.className] Additional classes to apply to the card.
  * @param {string}        [props.name]      Custom block name to display before the title.
- * @return {Element} 						Block card component.
+ * @return {Element} Block card component.
  */
 function BlockCard( { title, icon, description, blockType, className, name } ) {
 	if ( blockType ) {
