@@ -54,7 +54,7 @@ const { Badge } = unlock( componentsPrivateApis );
  * @param {Object}        [props.blockType] Deprecated: Object containing block type data.
  * @param {string}        [props.className] Additional classes to apply to the card.
  * @param {string}        [props.name]      Custom block name to display before the title.
- * @return {Element} Block card component.
+ * @return {Element}                        Block card component.
  */
 function BlockCard( { title, icon, description, blockType, className, name } ) {
 	if ( blockType ) {
