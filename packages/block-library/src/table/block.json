@@ -195,7 +195,7 @@
 				"width": true
 			}
 		},
-		"__experimentalSelector": ".wp-block-table > table",
+		"__experimentalSelector": ".wp-block-table",
 		"interactivity": {
 			"clientNavigation": true
 		}
