@@ -195,9 +195,14 @@
 				"width": true
 			}
 		},
-		"__experimentalSelector": ".wp-block-table",
+		"__experimentalSelector": ".wp-block-table > table",
 		"interactivity": {
 			"clientNavigation": true
+		}
+	},
+	"selectors": {
+		"spacing": {
+			"margin": ".wp-block-table"
 		}
 	},
 	"styles": [
