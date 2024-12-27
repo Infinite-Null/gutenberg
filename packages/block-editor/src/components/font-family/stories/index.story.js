@@ -8,10 +8,12 @@ import { useState } from '@wordpress/element';
  */
 import FontFamilyControl from '..';
 
-export default {
+const meta = {
 	component: FontFamilyControl,
 	title: 'BlockEditor/FontFamilyControl',
 };
+
+export default meta;
 
 export const Default = {
 	render: function Template( props ) {
