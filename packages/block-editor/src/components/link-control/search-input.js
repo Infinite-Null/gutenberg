@@ -7,11 +7,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import deprecated from '@wordpress/deprecated';
 import { URLInput } from '../';
-import { CREATE_TYPE } from './constants';
 import LinkControlSearchResults from './search-results';
+import { CREATE_TYPE } from './constants';
 import useSearchHandler from './use-search-handler';
+import deprecated from '@wordpress/deprecated';
 
 // Must be a function as otherwise URLInput will default
 // to the fetchLinkSuggestions passed in block editor settings
@@ -27,6 +27,7 @@ const LinkControlSearchInput = forwardRef(
 			children,
 			currentLink = {},
 			className = null,
+			tabClassName = null,
 			placeholder = null,
 			withCreateSuggestion = false,
 			onCreateSuggestion = noop,
@@ -152,7 +153,7 @@ const LinkControlSearchInput = forwardRef(
 					ref={ ref }
 					suffix={ suffix }
 					showTabs={ showTabs }
-					tabClassName="block-editor-tab-control__field"
+					tabClassName={ tabClassName }
 					tabs={ tabs }
 				/>
 				{ children }

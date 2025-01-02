@@ -426,6 +426,7 @@ function LinkControl( {
 							}
 							tabs={ tabs }
 							showTabs={ showTabs }
+							tabClassName="block-editor-tab-control__field"
 						/>
 					</div>
 					{ errorMessage && (
