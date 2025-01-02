@@ -28,6 +28,8 @@ export default function LoginOutEdit( { attributes, setAttributes } ) {
 						setAttributes( {
 							displayLoginAsForm: false,
 							redirectToCurrent: true,
+							loginText: 'Log in',
+							logoutText: 'Log out',
 						} );
 					} }
 					dropdownMenuProps={ dropdownMenuProps }
@@ -69,6 +71,15 @@ export default function LoginOutEdit( { attributes, setAttributes } ) {
 								} )
 							}
 						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
+						label={ __( 'Login Text' ) }
+						isShownByDefault
+						hasValue={ () => loginText !== 'Log in' }
+						onDeselect={ () =>
+							setAttributes( { loginText: 'Log in' } )
+						}
+					>
 						<TextControl
 							label={ __( 'Login Text' ) }
 							value={ loginText }
@@ -80,6 +91,15 @@ export default function LoginOutEdit( { attributes, setAttributes } ) {
 							__next40pxDefaultSize
 							__nextHasNoMarginBottom
 						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
+						label={ __( 'Logout Text' ) }
+						isShownByDefault
+						hasValue={ () => logoutText !== 'Log out' }
+						onDeselect={ () =>
+							setAttributes( { logoutText: 'Log out' } )
+						}
+					>
 						<TextControl
 							label={ __( 'Logout Text' ) }
 							value={ logoutText }
