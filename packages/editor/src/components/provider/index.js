@@ -163,6 +163,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 		BlockEditorProviderComponent = ExperimentalBlockEditorProvider,
 		__unstableTemplate: template,
 	} ) => {
+		const hasTemplate = !! template;
 		const {
 			editorSettings,
 			selection,
@@ -195,7 +196,9 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 					isReady: __unstableIsEditorReady(),
 					mode: getRenderingMode(),
 					defaultMode:
-						postTypeObject?.default_rendering_mode ?? 'post-only',
+						hasTemplate && postTypeObject?.default_rendering_mode
+							? postTypeObject?.default_rendering_mode
+							: 'post-only',
 					selection: getEditorSelection(),
 					postTypeEntities:
 						post.type === 'wp_template'
@@ -203,8 +206,9 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 							: null,
 				};
 			},
-			[ post.type ]
+			[ post.type, hasTemplate ]
 		);
+
 		const shouldRenderTemplate = !! template && mode !== 'post-only';
 		const rootLevelPost = shouldRenderTemplate ? template : post;
 		const defaultBlockContext = useMemo( () => {
@@ -299,15 +303,11 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 					}
 				);
 			}
-		}, [
-			createWarningNotice,
-			initialEdits,
-			settings,
-			post,
-			recovery,
-			setupEditor,
-			updatePostLock,
-		] );
+
+			// The dependencies of the hook are omitted deliberately
+			// We only want to run setupEditor (with initialEdits) only once per post.
+			// A better solution in the future would be to split this effect into multiple ones.
+		}, [] );
 
 		// Synchronizes the active post with the state
 		useEffect( () => {
@@ -411,7 +411,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
  * </EditorProvider>
  * ```
  *
- * @return {JSX.Element} The rendered EditorProvider component.
+ * @return {React.ReactNode} The rendered EditorProvider component.
  */
 export function EditorProvider( props ) {
 	return (

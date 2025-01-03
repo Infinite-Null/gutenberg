@@ -292,24 +292,41 @@ interface ViewBase {
 	 * The fields to render
 	 */
 	fields?: string[];
-}
-
-export interface CombinedField {
-	id: string;
-
-	label: string;
-
-	header?: string | ReactElement;
 
 	/**
-	 * The fields to use as columns.
+	 * Title field
 	 */
-	children: string[];
+	titleField?: string;
 
 	/**
-	 * The direction of the stack.
+	 * Media field
 	 */
-	direction: 'horizontal' | 'vertical';
+	mediaField?: string;
+
+	/**
+	 * Description field
+	 */
+	descriptionField?: string;
+
+	/**
+	 * Whether to show the title
+	 */
+	showTitle?: boolean;
+
+	/**
+	 * Whether to show the media
+	 */
+	showMedia?: boolean;
+
+	/**
+	 * Whether to show the description
+	 */
+	showDescription?: boolean;
+
+	/**
+	 * Whether to show the hierarchical levels.
+	 */
+	showLevels?: boolean;
 }
 
 export interface ColumnStyle {
@@ -329,41 +346,26 @@ export interface ColumnStyle {
 	minWidth?: string | number;
 }
 
+export type Density = 'compact' | 'balanced' | 'comfortable';
+
 export interface ViewTable extends ViewBase {
 	type: 'table';
 
 	layout?: {
 		/**
-		 * The field to use as the primary field.
-		 */
-		primaryField?: string;
-
-		/**
-		 * The fields to use as columns.
-		 */
-		combinedFields?: CombinedField[];
-
-		/**
 		 * The styles for the columns.
 		 */
 		styles?: Record< string, ColumnStyle >;
+
+		/**
+		 * The density of the view.
+		 */
+		density?: Density;
 	};
 }
 
 export interface ViewList extends ViewBase {
 	type: 'list';
-
-	layout?: {
-		/**
-		 * The field to use as the primary field.
-		 */
-		primaryField?: string;
-
-		/**
-		 * The field to use as the media field.
-		 */
-		mediaField?: string;
-	};
 }
 
 export interface ViewGrid extends ViewBase {
@@ -371,24 +373,14 @@ export interface ViewGrid extends ViewBase {
 
 	layout?: {
 		/**
-		 * The field to use as the primary field.
-		 */
-		primaryField?: string;
-
-		/**
-		 * The field to use as the media field.
-		 */
-		mediaField?: string;
-
-		/**
-		 * The fields to use as columns.
-		 */
-		columnFields?: string[];
-
-		/**
 		 * The fields to use as badge fields.
 		 */
 		badgeFields?: string[];
+
+		/**
+		 * The preview size of the grid.
+		 */
+		previewSize?: number;
 	};
 }
 
@@ -493,15 +485,15 @@ export interface ViewBaseProps< Item > {
 	data: Item[];
 	fields: NormalizedField< Item >[];
 	getItemId: ( item: Item ) => string;
+	getItemLevel?: ( item: Item ) => number;
 	isLoading?: boolean;
 	onChangeView: ( view: View ) => void;
 	onChangeSelection: SetSelection;
 	selection: string[];
 	setOpenedFilter: ( fieldId: string ) => void;
-	onClickItem: ( item: Item ) => void;
+	onClickItem?: ( item: Item ) => void;
 	isItemClickable: ( item: Item ) => boolean;
 	view: View;
-	density: number;
 }
 
 export interface ViewTableProps< Item > extends ViewBaseProps< Item > {
