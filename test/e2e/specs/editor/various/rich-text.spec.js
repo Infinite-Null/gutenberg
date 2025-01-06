@@ -8,6 +8,32 @@ test.describe( 'RichText (@firefox, @webkit)', () => {
 		await admin.createNewPost();
 	} );
 
+	test( 'should strip line breaks when pasting with disableLineBreaks enabled', async ( {
+		editor,
+		pageUtils,
+	} ) => {
+		await editor.insertBlock( { name: 'core/site-title' } );
+
+		await editor.canvas
+			.locator( 'role=textbox[name="Site title text"]' )
+			.click();
+
+		const multiLineContent = 'First<br/>Second<br/>Third';
+		pageUtils.setClipboardData( {
+			plainText: multiLineContent,
+			html: multiLineContent.replace( /\n/g, '<br>' ),
+		} );
+
+		await pageUtils.pressKeys( 'primary+a' );
+		await pageUtils.pressKeys( 'Backspace' );
+		await pageUtils.pressKeys( 'primary+v' );
+
+		const renderedText = await editor.canvas
+			.locator( 'role=textbox[name="Site title text"]' )
+			.innerText();
+		expect( renderedText ).toBe( 'First Second Third' );
+	} );
+
 	test( 'should handle change in tag name gracefully', async ( {
 		page,
 		editor,
