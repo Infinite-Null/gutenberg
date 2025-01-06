@@ -34,6 +34,32 @@ test.describe( 'RichText (@firefox, @webkit)', () => {
 		expect( renderedText ).toBe( 'First Second Third' );
 	} );
 
+	test( 'should not strip line breaks when pasting with disableLineBreaks diabled', async ( {
+		editor,
+		pageUtils,
+	} ) => {
+		await editor.canvas
+			.locator( 'role=button[name="Add default block"i]' )
+			.click();
+
+		const multiLineContent = 'First<br/>Second<br/>Third';
+		pageUtils.setClipboardData( {
+			plainText: multiLineContent,
+			html: multiLineContent.replace( /\n/g, '<br>' ),
+		} );
+
+		await pageUtils.pressKeys( 'primary+a' );
+		await pageUtils.pressKeys( 'Backspace' );
+		await pageUtils.pressKeys( 'primary+v' );
+
+		expect( await editor.getBlocks() ).toMatchObject( [
+			{
+				name: 'core/paragraph',
+				attributes: { content: 'First<br>Second<br>Third' },
+			},
+		] );
+	} );
+
 	test( 'should handle change in tag name gracefully', async ( {
 		page,
 		editor,
