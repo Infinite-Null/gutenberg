@@ -18,22 +18,26 @@ import {
 	useResizeObserver,
 	usePrevious,
 } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useState, useRef, useEffect } from '@wordpress/element';
 import { CommandMenu } from '@wordpress/commands';
 import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
 import {
 	EditorSnackbars,
 	UnsavedChangesWarning,
+	ErrorBoundary,
 	privateApis as editorPrivateApis,
 } from '@wordpress/editor';
 import { privateApis as coreCommandsPrivateApis } from '@wordpress/core-commands';
 import { privateApis as routerPrivateApis } from '@wordpress/router';
+import { PluginArea } from '@wordpress/plugins';
+import { store as noticesStore } from '@wordpress/notices';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { store as preferencesStore } from '@wordpress/preferences';
 
 /**
  * Internal dependencies
  */
-import ErrorBoundary from '../error-boundary';
 import { default as SiteHub, SiteHubMobile } from '../site-hub';
 import ResizableFrame from '../resizable-frame';
 import { unlock } from '../../lock-unlock';
@@ -51,9 +55,9 @@ const { useLocation } = unlock( routerPrivateApis );
 
 const ANIMATION_DURATION = 0.3;
 
-function Layout( { route } ) {
-	const { params } = useLocation();
-	const { canvas = 'view' } = params;
+function Layout() {
+	const { query, name: routeKey, areas, widths } = useLocation();
+	const { canvas = 'view' } = query;
 	useCommands();
 	const isMobileViewport = useViewportMatch( 'medium', '<' );
 	const toggleRef = useRef();
@@ -63,9 +67,17 @@ function Layout( { route } ) {
 	const isEditorLoading = useIsSiteEditorLoading();
 	const [ isResizableFrameOversized, setIsResizableFrameOversized ] =
 		useState( false );
-	const { name: routeKey, areas, widths } = route;
 	const animationRef = useMovingAnimation( {
 		triggerAnimationOnChange: routeKey + '-' + canvas,
+	} );
+
+	const { showIconLabels } = useSelect( ( select ) => {
+		return {
+			showIconLabels: select( preferencesStore ).get(
+				'core',
+				'showIconLabels'
+			),
+		};
 	} );
 
 	const [ backgroundColor ] = useGlobalStyle( 'color.background' );
@@ -91,6 +103,7 @@ function Layout( { route } ) {
 					navigateRegionsProps.className,
 					{
 						'is-full-canvas': canvas === 'edit',
+						'show-icon-labels': showIconLabels,
 					}
 				) }
 			>
@@ -130,11 +143,13 @@ function Layout( { route } ) {
 										/>
 										<SidebarContent
 											shouldAnimate={
-												routeKey !== 'styles-view'
+												routeKey !== 'styles'
 											}
 											routeKey={ routeKey }
 										>
-											{ areas.sidebar }
+											<ErrorBoundary>
+												{ areas.sidebar }
+											</ErrorBoundary>
 										</SidebarContent>
 										<SaveHub />
 										<SavePanel />
@@ -158,7 +173,7 @@ function Layout( { route } ) {
 									/>
 								</SidebarContent>
 							) }
-							{ areas.mobile }
+							<ErrorBoundary>{ areas.mobile }</ErrorBoundary>
 						</div>
 					) }
 
@@ -171,7 +186,7 @@ function Layout( { route } ) {
 									maxWidth: widths?.content,
 								} }
 							>
-								{ areas.content }
+								<ErrorBoundary>{ areas.content }</ErrorBoundary>
 							</div>
 						) }
 
@@ -182,7 +197,7 @@ function Layout( { route } ) {
 								maxWidth: widths?.edit,
 							} }
 						>
-							{ areas.edit }
+							<ErrorBoundary>{ areas.edit }</ErrorBoundary>
 						</div>
 					) }
 
@@ -236,9 +251,24 @@ function Layout( { route } ) {
 }
 
 export default function LayoutWithGlobalStylesProvider( props ) {
+	const { createErrorNotice } = useDispatch( noticesStore );
+	function onPluginAreaError( name ) {
+		createErrorNotice(
+			sprintf(
+				/* translators: %s: plugin name */
+				__(
+					'The "%s" plugin has encountered an error and cannot be rendered.'
+				),
+				name
+			)
+		);
+	}
+
 	return (
 		<SlotFillProvider>
 			<GlobalStylesProvider>
+				{ /** This needs to be within the SlotFillProvider */ }
+				<PluginArea onError={ onPluginAreaError } />
 				<Layout { ...props } />
 			</GlobalStylesProvider>
 		</SlotFillProvider>

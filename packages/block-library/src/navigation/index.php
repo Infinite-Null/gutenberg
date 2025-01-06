@@ -539,8 +539,8 @@ class WP_Navigation_Block_Renderer {
 			$inner_blocks_html,
 			$toggle_aria_label_open,
 			$toggle_aria_label_close,
-			esc_attr( implode( ' ', $responsive_container_classes ) ),
-			esc_attr( implode( ' ', $open_button_classes ) ),
+			esc_attr( trim( implode( ' ', $responsive_container_classes ) ) ),
+			esc_attr( trim( implode( ' ', $open_button_classes ) ) ),
 			( ! empty( $overlay_inline_styles ) ) ? "style=\"$overlay_inline_styles\"" : '',
 			$toggle_button_content,
 			$toggle_close_button_content,
@@ -567,13 +567,14 @@ class WP_Navigation_Block_Renderer {
 		$is_responsive_menu = static::is_responsive( $attributes );
 		$style              = static::get_styles( $attributes );
 		$class              = static::get_classes( $attributes );
-		$wrapper_attributes = get_block_wrapper_attributes(
-			array(
-				'class'      => $class,
-				'style'      => $style,
-				'aria-label' => $nav_menu_name,
-			)
+		$extra_attributes   = array(
+			'class' => $class,
+			'style' => $style,
 		);
+		if ( ! empty( $nav_menu_name ) ) {
+			$extra_attributes['aria-label'] = $nav_menu_name;
+		}
+		$wrapper_attributes = get_block_wrapper_attributes( $extra_attributes );
 
 		if ( $is_responsive_menu ) {
 			$nav_element_directives = static::get_nav_element_directives( $is_interactive );
