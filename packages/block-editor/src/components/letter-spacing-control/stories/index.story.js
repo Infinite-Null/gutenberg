@@ -3,7 +3,7 @@
  */
 import LetterSpacingControl from '../';
 
-export default {
+const meta = {
 	title: 'BlockEditor/LetterSpacingControl',
 	component: LetterSpacingControl,
 	parameters: {
@@ -18,7 +18,7 @@ export default {
 	argTypes: {
 		onChange: {
 			action: 'onChange',
-			description: 'Function to be called when the value is changed',
+			description: 'A callback function invoked when the value is changed.',
 			table: {
 				type: {
 					summary: 'function',
@@ -34,14 +34,14 @@ export default {
 					summary: 'number',
 				},
 			},
-			description: 'Letter spacing value in pixels, em, or rem.',
+			description: 'The current value of the letter spacing setting.',
 		},
 		__next40pxDefaultSize: {
 			control: {
 				type: 'boolean',
 			},
 			description:
-				'Start opting into the larger default height for future versions.',
+				'Defines the default size of elements within a block or component.',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -50,7 +50,7 @@ export default {
 		},
 		__unstableInputWidth: {
 			description:
-				'Width of the input field for letter-spacing, defaults to 60px.',
+				'Input width to pass through to inner UnitControl. Should be a valid CSS value.',
 			control: {
 				type: null,
 			},
@@ -62,6 +62,8 @@ export default {
 		},
 	},
 };
+
+export default meta;
 
 /**
  * Default story shows the LetterSpacingControl.
