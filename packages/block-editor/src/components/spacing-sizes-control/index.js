@@ -25,6 +25,45 @@ import {
 	getInitialView,
 } from './utils';
 
+/**
+ * A flexible control for managing spacing values in the block editor. Supports single, axial,
+ * and separated input controls for different spacing configurations with automatic view selection
+ * based on current values and available sides.
+ *
+ * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/block-editor/src/components/spacing-sizes-control/README.md
+ *
+ * @example
+ * ```jsx
+ * function SpacerBlock() {
+ *   return (
+ *     <View className="tools-panel-item-spacing">
+ *       <SpacingSizesControl
+ *         values={{ all: value }}
+ *         onChange={handleOnChange}
+ *         label="Height"
+ *         units={units}
+ *         allowReset={false}
+ *         splitOnAxis={false}
+ *         showSideInLabel={false}
+ *       />
+ *     </View>
+ *   );
+ * }
+ * ```
+ *
+ * @param {Object}   props                    Component props.
+ * @param {Object}   props.inputProps         Additional props for input controls.
+ * @param {string}   props.label              Label for the control.
+ * @param {number}   props.minimumCustomValue Minimum value for custom input.
+ * @param {Function} props.onChange           Called when spacing values change.
+ * @param {Function} props.onMouseOut         Called when mouse leaves the control.
+ * @param {Function} props.onMouseOver        Called when mouse enters the control.
+ * @param {boolean}  props.showSideInLabel    Show side in control label.
+ * @param {Array}    props.sides              Available sides for control.
+ * @param {boolean}  props.useSelect          Use select control for predefined values.
+ * @param {Object}   props.values             Current spacing values.
+ * @return {Element}                         Spacing sizes control component.
+ */
 export default function SpacingSizesControl( {
 	inputProps,
 	label: labelProp,
