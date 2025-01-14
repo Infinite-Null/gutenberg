@@ -700,6 +700,15 @@ Add text that respects your spacing and tabs, and also allows styling. ([Source]
 -	**Supports:** anchor, color (background, gradients, text), interactivity (clientNavigation), spacing (margin, padding), typography (fontSize, lineHeight)
 -	**Attributes:** content
 
+## Progress Bar
+
+Display a progress bar. Useful for tracking progress on a task or project. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/progress-bar))
+
+-	**Name:** core/progress-bar
+-	**Category:** design
+-	**Supports:** align, ~~html~~
+-	**Attributes:** backgroundColor, label, max, progressColor, value
+
 ## Pullquote
 
 Give special visual emphasis to a quote from your text. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/pullquote))
