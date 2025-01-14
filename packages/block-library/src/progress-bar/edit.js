@@ -48,7 +48,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Label' ) }
 						value={ label || '' }
 						onChange={ ( labelText ) =>
-							setAttributes( { labelText } )
+							setAttributes( { label: labelText } )
 						}
 					/>
 					<RangeControl
@@ -57,7 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Progress Value' ) }
 						value={ value }
 						onChange={ ( currentValue ) =>
-							setAttributes( { currentValue } )
+							setAttributes( { value: currentValue } )
 						}
 						min={ 0 }
 						max={ max }
@@ -68,7 +68,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Maximum Value' ) }
 						value={ max }
 						onChange={ ( maxValue ) =>
-							setAttributes( { maxValue } )
+							setAttributes( { max: maxValue } )
 						}
 						min={ 1 }
 						max={ 1000 }
@@ -80,13 +80,15 @@ export default function Edit( { attributes, setAttributes } ) {
 						{
 							value: backgroundColor,
 							onChange: ( bgColor ) =>
-								setAttributes( { bgColor } ),
+								setAttributes( { backgroundColor: bgColor } ),
 							label: __( 'Background Color' ),
 						},
 						{
 							value: progressColor,
 							onChange: ( progressBarColor ) =>
-								setAttributes( { progressBarColor } ),
+								setAttributes( {
+									progressColor: progressBarColor,
+								} ),
 							label: __( 'Progress Color' ),
 						},
 					] }
