@@ -218,6 +218,7 @@ export { default as previous } from './library/previous';
 export { default as next } from './library/next';
 export { default as offline } from './library/offline';
 export { default as preformatted } from './library/preformatted';
+export { default as progressBar } from './library/progress-bar';
 export { default as published } from './library/published';
 export { default as pullLeft } from './library/pull-left';
 export { default as pullRight } from './library/pull-right';

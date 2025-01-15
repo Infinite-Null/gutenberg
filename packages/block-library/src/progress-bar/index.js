@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { _x } from '@wordpress/i18n';
-import { home } from '@wordpress/icons';
+import { progressBar as icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -17,7 +17,7 @@ const { name } = metadata;
 export { metadata, name };
 
 export const settings = {
-	icon: home,
+	icon,
 	edit,
 	save,
 	example: {
