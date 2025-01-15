@@ -4,9 +4,10 @@
 import {
 	InspectorControls,
 	PanelColorSettings,
+	RichText,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, TextControl } from '@wordpress/components';
+import { PanelBody, RangeControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -16,23 +17,23 @@ export default function Edit( { attributes, setAttributes } ) {
 		max = 100,
 		backgroundColor,
 		progressColor,
+		height,
+		showValue,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
 		className: 'wp-block-progress-bar',
 	} );
 
-	// Custom styles for the progress bar
 	const progressBarStyle = {
-		backgroundColor: backgroundColor || '#f0f0f0',
-		borderRadius: '4px',
+		backgroundColor,
 		overflow: 'hidden',
-		height: '24px',
+		height: `${ height }px`,
 		position: 'relative',
 	};
 
 	const progressStyle = {
-		backgroundColor: progressColor || '#4CAF50',
+		backgroundColor: progressColor,
 		width: `${ ( value / max ) * 100 }%`,
 		height: '100%',
 		transition: 'width 0.3s ease',
@@ -42,15 +43,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		<div { ...blockProps }>
 			<InspectorControls>
 				<PanelBody title={ __( 'Progress Bar Settings' ) }>
-					<TextControl
-						__next40pxDefaultSize
-						__nextHasNoMarginBottom
-						label={ __( 'Label' ) }
-						value={ label || '' }
-						onChange={ ( labelText ) =>
-							setAttributes( { label: labelText } )
-						}
-					/>
 					<RangeControl
 						__next40pxDefaultSize
 						__nextHasNoMarginBottom
@@ -72,6 +64,27 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 						min={ 1 }
 						max={ 1000 }
+					/>
+					<RangeControl
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+						label={ __( 'Progress bar height' ) }
+						help={ __( 'Height in pixels' ) }
+						value={ height }
+						onChange={ ( heightValue ) =>
+							setAttributes( { height: heightValue } )
+						}
+						min={ 6 }
+						max={ 30 }
+					/>
+					<ToggleControl
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+						label={ __( 'Show value' ) }
+						checked={ showValue }
+						onChange={ () =>
+							setAttributes( { showValue: ! showValue } )
+						}
 					/>
 				</PanelBody>
 				<PanelColorSettings
@@ -96,11 +109,25 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div className="wp-block-progress-bar__container">
-				{ label && (
-					<div className="wp-block-progress-bar__label">
-						{ label }
-					</div>
-				) }
+				<div
+					style={ {
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					} }
+				>
+					<RichText
+						identifier="value"
+						tagName="p"
+						className="wp-block-progress-bar__label"
+						value={ label }
+						onChange={ ( content ) =>
+							setAttributes( { label: content } )
+						}
+						placeholder={ __( 'Write heading…' ) }
+					/>
+					{ showValue && <p>{ value }%</p> }
+				</div>
 				<div
 					style={ progressBarStyle }
 					className="wp-block-progress-bar__bar"
@@ -108,11 +135,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<div
 						style={ progressStyle }
 						className="wp-block-progress-bar__progress"
-					>
-						<span className="wp-block-progress-bar__value">
-							{ value }%
-						</span>
-					</div>
+					></div>
 				</div>
 			</div>
 		</div>

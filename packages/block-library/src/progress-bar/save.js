@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const {
@@ -10,27 +10,24 @@ export default function save( { attributes } ) {
 		max = 100,
 		backgroundColor,
 		progressColor,
+		height,
+		showValue,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
 		className: 'wp-block-progress-bar',
 	} );
 
-	// Calculate the percentage
-	const percentage = Math.min( Math.max( ( value / max ) * 100, 0 ), 100 );
-
-	// Custom styles for the progress bar
 	const progressBarStyle = {
-		backgroundColor: backgroundColor || '#f0f0f0',
-		borderRadius: '4px',
+		backgroundColor,
 		overflow: 'hidden',
-		height: '24px',
+		height: `${ height }px`,
 		position: 'relative',
 	};
 
 	const progressStyle = {
-		backgroundColor: progressColor || '#4CAF50',
-		width: `${ percentage }%`,
+		backgroundColor: progressColor,
+		width: `${ ( value / max ) * 100 }%`,
 		height: '100%',
 		transition: 'width 0.3s ease',
 	};
@@ -38,35 +35,28 @@ export default function save( { attributes } ) {
 	return (
 		<div { ...blockProps }>
 			<div className="wp-block-progress-bar__container">
-				{ label && (
-					<div className="wp-block-progress-bar__label">
-						{ label }
-					</div>
-				) }
+				<div
+					style={ {
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					} }
+				>
+					<RichText.Content
+						tagName="p"
+						className="wp-block-progress-bar__label"
+						value={ label }
+					/>
+					{ showValue && <p>{ value }%</p> }
+				</div>
 				<div
 					style={ progressBarStyle }
 					className="wp-block-progress-bar__bar"
 				>
-					<meter
-						className="wp-block-progress-bar__meter"
-						value={ value }
-						max={ max }
-						style={ {
-							display: 'block',
-							width: '100%',
-							height: '100%',
-							...progressStyle,
-						} }
-					>
-						<div
-							style={ progressStyle }
-							className="wp-block-progress-bar__progress"
-						>
-							<span className="wp-block-progress-bar__value">
-								{ percentage.toFixed( 1 ) }%
-							</span>
-						</div>
-					</meter>
+					<div
+						style={ progressStyle }
+						className="wp-block-progress-bar__progress"
+					></div>
 				</div>
 			</div>
 		</div>
