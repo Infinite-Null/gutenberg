@@ -7,8 +7,18 @@ import {
 	RichText,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, ToggleControl } from '@wordpress/components';
+import {
+	RangeControl,
+	ToggleControl,
+	__experimentalToolsPanel as ToolsPanel,
+	__experimentalToolsPanelItem as ToolsPanelItem,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -39,54 +49,100 @@ export default function Edit( { attributes, setAttributes } ) {
 		transition: 'width 0.3s ease',
 	};
 
+	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
+
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Progress Bar Settings' ) }>
-					<RangeControl
-						__next40pxDefaultSize
-						__nextHasNoMarginBottom
+				<ToolsPanel
+					label={ __( 'Progress Bar Settings' ) }
+					resetAll={ () => {
+						setAttributes( {
+							label: '',
+							value: 50,
+							max: 100,
+							backgroundColor: '#f0f0f0',
+							progressColor: '#1E1E1E',
+							height: 11,
+							showValue: true,
+						} );
+					} }
+					dropdownMenuProps={ dropdownMenuProps }
+				>
+					<ToolsPanelItem
 						label={ __( 'Progress Value' ) }
-						value={ value }
-						onChange={ ( currentValue ) =>
-							setAttributes( { value: currentValue } )
-						}
-						min={ 0 }
-						max={ max }
-					/>
-					<RangeControl
-						__next40pxDefaultSize
-						__nextHasNoMarginBottom
+						isShownByDefault
+						hasValue={ () => value !== 50 }
+						onDeselect={ () => setAttributes( { value: 50 } ) }
+					>
+						<RangeControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Progress Value' ) }
+							value={ value }
+							onChange={ ( currentValue ) =>
+								setAttributes( { value: currentValue } )
+							}
+							min={ 0 }
+							max={ max }
+						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
 						label={ __( 'Maximum Value' ) }
-						value={ max }
-						onChange={ ( maxValue ) =>
-							setAttributes( { max: maxValue } )
-						}
-						min={ 1 }
-						max={ 1000 }
-					/>
-					<RangeControl
-						__next40pxDefaultSize
-						__nextHasNoMarginBottom
+						isShownByDefault
+						hasValue={ () => max !== 100 }
+						onDeselect={ () => setAttributes( { max: 100 } ) }
+					>
+						<RangeControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Maximum Value' ) }
+							value={ max }
+							onChange={ ( maxValue ) =>
+								setAttributes( { max: maxValue } )
+							}
+							min={ 1 }
+							max={ 1000 }
+						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
 						label={ __( 'Progress bar height' ) }
-						help={ __( 'Height in pixels' ) }
-						value={ height }
-						onChange={ ( heightValue ) =>
-							setAttributes( { height: heightValue } )
-						}
-						min={ 6 }
-						max={ 30 }
-					/>
-					<ToggleControl
-						__next40pxDefaultSize
-						__nextHasNoMarginBottom
+						isShownByDefault
+						hasValue={ () => height !== 11 }
+						onDeselect={ () => setAttributes( { height: 11 } ) }
+					>
+						<RangeControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Progress bar height' ) }
+							help={ __( 'Height in pixels' ) }
+							value={ height }
+							onChange={ ( heightValue ) =>
+								setAttributes( { height: heightValue } )
+							}
+							min={ 6 }
+							max={ 30 }
+						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
 						label={ __( 'Show value' ) }
-						checked={ showValue }
-						onChange={ () =>
-							setAttributes( { showValue: ! showValue } )
+						isShownByDefault
+						hasValue={ () => ! showValue }
+						onDeselect={ () =>
+							setAttributes( { showValue: true } )
 						}
-					/>
-				</PanelBody>
+					>
+						<ToggleControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Show value' ) }
+							checked={ showValue }
+							onChange={ () =>
+								setAttributes( { showValue: ! showValue } )
+							}
+						/>
+					</ToolsPanelItem>
+				</ToolsPanel>
 				<PanelColorSettings
 					title={ __( 'Color Settings' ) }
 					colorSettings={ [

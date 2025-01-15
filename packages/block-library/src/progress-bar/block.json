@@ -37,7 +37,6 @@
 		}
 	},
 	"supports": {
-		"align": true,
 		"html": false
 	},
 	"style": "wp-block-progress-bar"

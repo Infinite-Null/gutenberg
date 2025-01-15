@@ -706,7 +706,7 @@ Display a progress bar. Useful for tracking progress on a task or project. ([Sou
 
 -	**Name:** core/progress-bar
 -	**Category:** design
--	**Supports:** align, ~~html~~
+-	**Supports:** ~~html~~
 -	**Attributes:** backgroundColor, height, label, max, progressColor, showValue, value
 
 ## Pullquote
