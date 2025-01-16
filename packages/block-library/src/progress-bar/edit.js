@@ -37,16 +37,12 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const progressBarStyle = {
 		backgroundColor,
-		overflow: 'hidden',
 		height: `${ height }px`,
-		position: 'relative',
 	};
 
 	const progressStyle = {
 		backgroundColor: progressColor,
 		width: `${ ( value / max ) * 100 }%`,
-		height: '100%',
-		transition: 'width 0.3s ease',
 	};
 
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
@@ -165,13 +161,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div className="wp-block-progress-bar__container">
-				<div
-					style={ {
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					} }
-				>
+				<div>
 					<RichText
 						identifier="value"
 						tagName="p"
