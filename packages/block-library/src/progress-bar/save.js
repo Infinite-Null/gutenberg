@@ -20,28 +20,18 @@ export default function save( { attributes } ) {
 
 	const progressBarStyle = {
 		backgroundColor,
-		overflow: 'hidden',
 		height: `${ height }px`,
-		position: 'relative',
 	};
 
 	const progressStyle = {
 		backgroundColor: progressColor,
 		width: `${ ( value / max ) * 100 }%`,
-		height: '100%',
-		transition: 'width 0.3s ease',
 	};
 
 	return (
 		<div { ...blockProps }>
 			<div className="wp-block-progress-bar__container">
-				<div
-					style={ {
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					} }
-				>
+				<div>
 					<RichText.Content
 						tagName="p"
 						className="wp-block-progress-bar__label"

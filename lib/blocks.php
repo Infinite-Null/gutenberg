@@ -43,6 +43,7 @@ function gutenberg_reregister_core_block_types() {
 				'verse',
 				'video',
 				'embed',
+				'progress-bar',
 			),
 			'block_names'   => array(
 				'archives.php'                     => 'core/archives',
