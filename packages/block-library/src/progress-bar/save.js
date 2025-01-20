@@ -3,7 +3,7 @@
  */
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 
-export default function save( { attributes } ) {
+export default function Save( { attributes } ) {
 	const {
 		label,
 		value,
@@ -12,8 +12,10 @@ export default function save( { attributes } ) {
 		progressColor,
 		height,
 		showValue,
+		isReadProgress,
 	} = attributes;
 
+	// eslint-disable-next-line react-compiler/react-compiler
 	const blockProps = useBlockProps.save( {
 		className: 'wp-block-progress-bar',
 	} );
@@ -28,24 +30,41 @@ export default function save( { attributes } ) {
 		width: `${ ( value / max ) * 100 }%`,
 	};
 
+	const readProgressStyle = {
+		backgroundColor: progressColor,
+		height: `${ height }px`,
+	};
+
 	return (
 		<div { ...blockProps }>
 			<div className="wp-block-progress-bar__container">
-				<div>
-					<RichText.Content
-						tagName="p"
-						className="wp-block-progress-bar__label"
-						value={ label }
-					/>
-					{ showValue && <p>{ value }%</p> }
-				</div>
+				{ ! isReadProgress && (
+					<div>
+						<RichText.Content
+							tagName="p"
+							className="wp-block-progress-bar__label"
+							value={ label }
+						/>
+						{ showValue && <p>{ value }%</p> }
+					</div>
+				) }
 				<div
 					style={ progressBarStyle }
-					className="wp-block-progress-bar__bar"
+					className={
+						isReadProgress
+							? 'wp-block-progress-bar__read-bar'
+							: 'wp-block-progress-bar__bar'
+					}
 				>
 					<div
-						style={ progressStyle }
-						className="wp-block-progress-bar__progress"
+						style={
+							isReadProgress ? readProgressStyle : progressStyle
+						}
+						className={
+							isReadProgress
+								? 'wp-block-progress-bar__read-progress'
+								: 'wp-block-progress-bar__progress'
+						}
 					></div>
 				</div>
 			</div>

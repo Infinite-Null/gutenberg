@@ -29,6 +29,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		progressColor,
 		height,
 		showValue,
+		isReadProgress,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
@@ -43,6 +44,11 @@ export default function Edit( { attributes, setAttributes } ) {
 	const progressStyle = {
 		backgroundColor: progressColor,
 		width: `${ ( value / max ) * 100 }%`,
+	};
+
+	const readProgressStyle = {
+		backgroundColor: progressColor,
+		height: `${ height }px`,
 	};
 
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
@@ -61,6 +67,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							progressColor: '#1E1E1E',
 							height: 11,
 							showValue: true,
+							isReadProgress: false,
 						} );
 					} }
 					dropdownMenuProps={ dropdownMenuProps }
@@ -138,6 +145,26 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					</ToolsPanelItem>
+					<ToolsPanelItem
+						label={ __( 'Use as read progress' ) }
+						isShownByDefault
+						hasValue={ () => isReadProgress }
+						onDeselect={ () =>
+							setAttributes( { isReadProgress: false } )
+						}
+					>
+						<ToggleControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Use as read progress' ) }
+							checked={ isReadProgress }
+							onChange={ () =>
+								setAttributes( {
+									isReadProgress: ! isReadProgress,
+								} )
+							}
+						/>
+					</ToolsPanelItem>
 				</ToolsPanel>
 				<PanelColorSettings
 					title={ __( 'Color Settings' ) }
@@ -161,26 +188,38 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div className="wp-block-progress-bar__container">
-				<div>
-					<RichText
-						identifier="value"
-						tagName="p"
-						className="wp-block-progress-bar__label"
-						value={ label }
-						onChange={ ( content ) =>
-							setAttributes( { label: content } )
-						}
-						placeholder={ __( 'Write heading…' ) }
-					/>
-					{ showValue && <p>{ value }%</p> }
-				</div>
+				{ ! isReadProgress && (
+					<div>
+						<RichText
+							identifier="value"
+							tagName="p"
+							className="wp-block-progress-bar__label"
+							value={ label }
+							onChange={ ( content ) =>
+								setAttributes( { label: content } )
+							}
+							placeholder={ __( 'Write heading…' ) }
+						/>
+						{ showValue && <p>{ value }%</p> }
+					</div>
+				) }
 				<div
 					style={ progressBarStyle }
-					className="wp-block-progress-bar__bar"
+					className={
+						isReadProgress
+							? 'wp-block-progress-bar__read-bar'
+							: 'wp-block-progress-bar__bar'
+					}
 				>
 					<div
-						style={ progressStyle }
-						className="wp-block-progress-bar__progress"
+						style={
+							isReadProgress ? readProgressStyle : progressStyle
+						}
+						className={
+							isReadProgress
+								? 'wp-block-progress-bar__read-progress'
+								: 'wp-block-progress-bar__progress'
+						}
 					></div>
 				</div>
 			</div>

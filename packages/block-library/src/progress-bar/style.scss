@@ -1,3 +1,12 @@
+@keyframes grow-progress {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
 .wp-block-progress-bar {
 	&__container {
 		width: 100%;
@@ -21,5 +30,22 @@
 		@media not (prefers-reduced-motion) {
 			transition: width 0.3s ease;
 		}
+	}
+
+	&__read-bar {
+		width: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	&__read-progress {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		transform-origin: 0 50%;
+		animation: grow-progress auto linear;
+		animation-timeline: scroll() !important;
 	}
 }
