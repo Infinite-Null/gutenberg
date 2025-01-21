@@ -12,11 +12,11 @@ import { _x, sprintf } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import useSpacingSizes from './hooks/use-spacing-sizes';
 import AxialInputControls from './input-controls/axial';
 import SeparatedInputControls from './input-controls/separated';
 import SingleInputControl from './input-controls/single';
 import LinkedButton from './linked-button';
-import useSpacingSizes from './hooks/use-spacing-sizes';
 import {
 	ALL_SIDES,
 	DEFAULT_VALUES,
@@ -38,7 +38,12 @@ import {
  *   return (
  *     <View className="tools-panel-item-spacing">
  *       <SpacingSizesControl
- *         values={{ all: value }}
+ *         values={ {
+ *				top: '0px',
+ *				right: '0px',
+ *				bottom: '0px',
+ *				left: '0px',
+ *			} }
  *         onChange={handleOnChange}
  *         label="Height"
  *         units={units}

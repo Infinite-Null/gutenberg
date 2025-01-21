@@ -29,14 +29,19 @@ const DimensionInput = ( { label, onChange, value = '' } ) => {
 		defaultValues: { px: 100, em: 10, rem: 10, vw: 10, vh: 25 },
 	} );
 
-	const handleOnChange = ( unprocessedValue ) => {
-		onChange( unprocessedValue.all );
+	const handleOnChange = ( { top, right, bottom, left } ) => {
+		onChange( { top, right, bottom, left } );
 	};
 
 	return (
 		<View className="tools-panel-item-spacing">
 			<SpacingSizesControl
-				values={ { all: value } }
+				values={ {
+					top: '0px',
+					right: '0px',
+					bottom: '0px',
+					left: '0px',
+				} }
 				onChange={ handleOnChange }
 				label={ label }
 				sides={ [ 'all' ] }
