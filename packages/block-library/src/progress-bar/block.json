@@ -38,6 +38,14 @@
 		"isReadProgress": {
 			"type": "boolean",
 			"default": false
+		},
+		"symbol": {
+			"type": "string",
+			"default": "%"
+		},
+		"symbolPosition": {
+			"type": "string",
+			"default": "suffix"
 		}
 	},
 	"supports": {

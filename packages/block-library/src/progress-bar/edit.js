@@ -9,6 +9,8 @@ import {
 } from '@wordpress/block-editor';
 import {
 	RangeControl,
+	SelectControl,
+	TextControl,
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
@@ -30,6 +32,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		height,
 		showValue,
 		isReadProgress,
+		symbol,
+		symbolPosition,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
@@ -68,6 +72,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							height: 11,
 							showValue: true,
 							isReadProgress: false,
+							symbol: '%',
+							symbolPosition: 'suffix',
 						} );
 					} }
 					dropdownMenuProps={ dropdownMenuProps }
@@ -165,6 +171,50 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					</ToolsPanelItem>
+					<ToolsPanelItem
+						label={ __( 'Value Symbol' ) }
+						isShownByDefault
+						hasValue={ () => symbol !== '%' }
+						onDeselect={ () => setAttributes( { symbol: '%' } ) }
+					>
+						<TextControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Value Symbol' ) }
+							value={ symbol }
+							onChange={ ( newSymbol ) =>
+								setAttributes( { symbol: newSymbol } )
+							}
+						/>
+					</ToolsPanelItem>
+					<ToolsPanelItem
+						label={ __( 'Symbol Position' ) }
+						isShownByDefault
+						hasValue={ () => symbolPosition !== 'suffix' }
+						onDeselect={ () =>
+							setAttributes( { symbolPosition: 'suffix' } )
+						}
+					>
+						<SelectControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Symbol Position' ) }
+							value={ symbolPosition }
+							options={ [
+								{
+									label: __( 'Before number' ),
+									value: 'prefix',
+								},
+								{
+									label: __( 'After number' ),
+									value: 'suffix',
+								},
+							] }
+							onChange={ ( position ) =>
+								setAttributes( { symbolPosition: position } )
+							}
+						/>
+					</ToolsPanelItem>
 				</ToolsPanel>
 				<PanelColorSettings
 					title={ __( 'Color Settings' ) }
@@ -200,7 +250,13 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 							placeholder={ __( 'Write heading…' ) }
 						/>
-						{ showValue && <p>{ value }%</p> }
+						{ showValue && (
+							<p>
+								{ symbolPosition === 'prefix'
+									? `${ symbol }${ value }`
+									: `${ value }${ symbol }` }
+							</p>
+						) }
 					</div>
 				) }
 				<div
