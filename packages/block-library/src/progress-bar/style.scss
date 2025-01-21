@@ -37,6 +37,19 @@
 		position: fixed;
 		left: 0;
 		top: 0;
+		z-index: 1000;
+
+		.admin-bar & {
+			top: 32px;
+
+			@media screen and (max-width: 779px) {
+				top: 46px;
+			}
+
+			@media screen and (max-width: 594px) {
+				top: 0;
+			}
+		}
 	}
 
 	&__read-progress {
@@ -46,6 +59,19 @@
 		width: 100%;
 		transform-origin: 0 50%;
 		animation: grow-progress auto linear;
+		z-index: 1000;
 		animation-timeline: scroll() !important;
+
+		.admin-bar & {
+			top: 32px;
+
+			@media screen and (max-width: 779px) {
+				top: 46px;
+			}
+
+			@media screen and (max-width: 594px) {
+				top: 0;
+			}
+		}
 	}
 }
