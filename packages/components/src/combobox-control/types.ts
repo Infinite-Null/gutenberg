@@ -86,4 +86,9 @@ export type ComboboxControlProps = Pick<
 	 * If passed, the combobox input will show a placeholder string if no values are present.
 	 */
 	placeholder?: string;
+	/**
+	 * Specifies which property of the options to use for search comparisons.
+	 * Defaults to searching the 'label' property if not specified.
+	 */
+	searchField?: string;
 };
