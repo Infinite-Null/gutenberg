@@ -8,6 +8,7 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import {
+	__experimentalNumberControl as NumberControl,
 	RangeControl,
 	SelectControl,
 	TextControl,
@@ -102,16 +103,16 @@ export default function Edit( { attributes, setAttributes } ) {
 						hasValue={ () => max !== 100 }
 						onDeselect={ () => setAttributes( { max: 100 } ) }
 					>
-						<RangeControl
+						<NumberControl
 							__next40pxDefaultSize
 							__nextHasNoMarginBottom
+							isShiftStepEnabled
+							shiftStep={ 10 }
 							label={ __( 'Maximum Value' ) }
 							value={ max }
 							onChange={ ( maxValue ) =>
 								setAttributes( { max: maxValue } )
 							}
-							min={ 1 }
-							max={ 1000 }
 						/>
 					</ToolsPanelItem>
 					<ToolsPanelItem
@@ -129,7 +130,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( heightValue ) =>
 								setAttributes( { height: heightValue } )
 							}
-							min={ 6 }
+							min={ 1 }
 							max={ 30 }
 						/>
 					</ToolsPanelItem>
