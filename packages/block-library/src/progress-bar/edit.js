@@ -94,119 +94,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					dropdownMenuProps={ dropdownMenuProps }
 				>
 					<ToolsPanelItem
-						label={ __( 'Progress Value' ) }
-						isShownByDefault
-						hasValue={ () => value !== 50 }
-						onDeselect={ () => setAttributes( { value: 50 } ) }
-					>
-						<RangeControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							label={ __( 'Progress Value' ) }
-							value={ value }
-							onChange={ ( currentValue ) =>
-								setAttributes( { value: currentValue } )
-							}
-							min={ 0 }
-							max={ max }
-						/>
-					</ToolsPanelItem>
-					<ToolsPanelItem
-						label={ __( 'Maximum Value' ) }
-						isShownByDefault
-						hasValue={ () => max !== 100 }
-						onDeselect={ () => setAttributes( { max: 100 } ) }
-					>
-						<NumberControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							isShiftStepEnabled
-							shiftStep={ 10 }
-							label={ __( 'Maximum Value' ) }
-							value={ max }
-							onChange={ ( maxValue ) =>
-								setAttributes( { max: maxValue } )
-							}
-						/>
-					</ToolsPanelItem>
-					<ToolsPanelItem
-						label={ __( 'Progress bar height' ) }
-						isShownByDefault
-						hasValue={ () => height !== 11 }
-						onDeselect={ () => setAttributes( { height: 11 } ) }
-					>
-						<RangeControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							label={ __( 'Progress bar height' ) }
-							help={ __( 'Height in pixels' ) }
-							value={ height }
-							onChange={ ( heightValue ) =>
-								setAttributes( { height: heightValue } )
-							}
-							min={ 1 }
-							max={ 30 }
-						/>
-					</ToolsPanelItem>
-					<ToolsPanelItem
-						label={ __( 'Show value' ) }
-						isShownByDefault
-						hasValue={ () => ! showValue }
-						onDeselect={ () =>
-							setAttributes( { showValue: true } )
-						}
-					>
-						<ToggleControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							label={ __( 'Show value' ) }
-							checked={ showValue }
-							onChange={ () =>
-								setAttributes( { showValue: ! showValue } )
-							}
-						/>
-					</ToolsPanelItem>
-					{ showValue && (
-						<ToolsPanelItem
-							label={ __( 'Show total value' ) }
-							isShownByDefault
-							hasValue={ () => showTotal }
-							onDeselect={ () =>
-								setAttributes( { showTotal: false } )
-							}
-						>
-							<ToggleControl
-								__next40pxDefaultSize
-								__nextHasNoMarginBottom
-								label={ __( 'Show total value' ) }
-								checked={ showTotal }
-								onChange={ () =>
-									setAttributes( { showTotal: ! showTotal } )
-								}
-							/>
-						</ToolsPanelItem>
-					) }
-					{ showValue && showTotal && (
-						<ToolsPanelItem
-							label={ __( 'Value Seprator' ) }
-							isShownByDefault
-							hasValue={ () => seprator !== '/' }
-							onDeselect={ () =>
-								setAttributes( { seprator: '/' } )
-							}
-						>
-							<TextControl
-								__next40pxDefaultSize
-								__nextHasNoMarginBottom
-								label={ __( 'Value Seprator' ) }
-								value={ seprator }
-								onChange={ ( newSeprator ) =>
-									setAttributes( { seprator: newSeprator } )
-								}
-							/>
-						</ToolsPanelItem>
-					) }
-					<ToolsPanelItem
 						label={ __( 'Use as read progress' ) }
 						isShownByDefault
 						hasValue={ () => isReadProgress }
@@ -226,50 +113,195 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					</ToolsPanelItem>
-					<ToolsPanelItem
-						label={ __( 'Value Symbol' ) }
-						isShownByDefault
-						hasValue={ () => symbol !== '%' }
-						onDeselect={ () => setAttributes( { symbol: '%' } ) }
-					>
-						<TextControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							label={ __( 'Value Symbol' ) }
-							value={ symbol }
-							onChange={ ( newSymbol ) =>
-								setAttributes( { symbol: newSymbol } )
-							}
-						/>
-					</ToolsPanelItem>
-					<ToolsPanelItem
-						label={ __( 'Symbol Position' ) }
-						isShownByDefault
-						hasValue={ () => symbolPosition !== 'suffix' }
-						onDeselect={ () =>
-							setAttributes( { symbolPosition: 'suffix' } )
-						}
-					>
-						<SelectControl
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-							label={ __( 'Symbol Position' ) }
-							value={ symbolPosition }
-							options={ [
-								{
-									label: __( 'Before number' ),
-									value: 'prefix',
-								},
-								{
-									label: __( 'After number' ),
-									value: 'suffix',
-								},
-							] }
-							onChange={ ( position ) =>
-								setAttributes( { symbolPosition: position } )
-							}
-						/>
-					</ToolsPanelItem>
+					{ ! isReadProgress && (
+						<>
+							<ToolsPanelItem
+								label={ __( 'Progress Value' ) }
+								isShownByDefault
+								hasValue={ () => value !== 50 }
+								onDeselect={ () =>
+									setAttributes( { value: 50 } )
+								}
+							>
+								<RangeControl
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
+									label={ __( 'Progress Value' ) }
+									value={ value }
+									onChange={ ( currentValue ) =>
+										setAttributes( { value: currentValue } )
+									}
+									min={ 0 }
+									max={ max }
+								/>
+							</ToolsPanelItem>
+							<ToolsPanelItem
+								label={ __( 'Maximum Value' ) }
+								isShownByDefault
+								hasValue={ () => max !== 100 }
+								onDeselect={ () =>
+									setAttributes( { max: 100 } )
+								}
+							>
+								<NumberControl
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
+									isShiftStepEnabled
+									shiftStep={ 10 }
+									label={ __( 'Maximum Value' ) }
+									value={ max }
+									onChange={ ( maxValue ) =>
+										setAttributes( { max: maxValue } )
+									}
+								/>
+							</ToolsPanelItem>
+							<ToolsPanelItem
+								label={ __( 'Progress bar height' ) }
+								isShownByDefault
+								hasValue={ () => height !== 11 }
+								onDeselect={ () =>
+									setAttributes( { height: 11 } )
+								}
+							>
+								<RangeControl
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
+									label={ __( 'Progress bar height' ) }
+									help={ __( 'Height in pixels' ) }
+									value={ height }
+									onChange={ ( heightValue ) =>
+										setAttributes( { height: heightValue } )
+									}
+									min={ 1 }
+									max={ 30 }
+								/>
+							</ToolsPanelItem>
+							<ToolsPanelItem
+								label={ __( 'Show value' ) }
+								isShownByDefault
+								hasValue={ () => ! showValue }
+								onDeselect={ () =>
+									setAttributes( { showValue: true } )
+								}
+							>
+								<ToggleControl
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
+									label={ __( 'Show value' ) }
+									checked={ showValue }
+									onChange={ () =>
+										setAttributes( {
+											showValue: ! showValue,
+										} )
+									}
+								/>
+							</ToolsPanelItem>
+							{ showValue && (
+								<ToolsPanelItem
+									label={ __( 'Show total value' ) }
+									isShownByDefault
+									hasValue={ () => showTotal }
+									onDeselect={ () =>
+										setAttributes( { showTotal: false } )
+									}
+								>
+									<ToggleControl
+										__next40pxDefaultSize
+										__nextHasNoMarginBottom
+										label={ __( 'Show total value' ) }
+										checked={ showTotal }
+										onChange={ () =>
+											setAttributes( {
+												showTotal: ! showTotal,
+											} )
+										}
+									/>
+								</ToolsPanelItem>
+							) }
+							{ showValue && showTotal && (
+								<ToolsPanelItem
+									label={ __( 'Value Seprator' ) }
+									isShownByDefault
+									hasValue={ () => seprator !== '/' }
+									onDeselect={ () =>
+										setAttributes( { seprator: '/' } )
+									}
+								>
+									<TextControl
+										__next40pxDefaultSize
+										__nextHasNoMarginBottom
+										label={ __( 'Value Seprator' ) }
+										value={ seprator }
+										onChange={ ( newSeprator ) =>
+											setAttributes( {
+												seprator: newSeprator,
+											} )
+										}
+									/>
+								</ToolsPanelItem>
+							) }
+							{ showValue && (
+								<>
+									<ToolsPanelItem
+										label={ __( 'Value Symbol' ) }
+										isShownByDefault
+										hasValue={ () => symbol !== '%' }
+										onDeselect={ () =>
+											setAttributes( { symbol: '%' } )
+										}
+									>
+										<TextControl
+											__next40pxDefaultSize
+											__nextHasNoMarginBottom
+											label={ __( 'Value Symbol' ) }
+											value={ symbol }
+											onChange={ ( newSymbol ) =>
+												setAttributes( {
+													symbol: newSymbol,
+												} )
+											}
+										/>
+									</ToolsPanelItem>
+									<ToolsPanelItem
+										label={ __( 'Symbol Position' ) }
+										isShownByDefault
+										hasValue={ () =>
+											symbolPosition !== 'suffix'
+										}
+										onDeselect={ () =>
+											setAttributes( {
+												symbolPosition: 'suffix',
+											} )
+										}
+									>
+										<SelectControl
+											__next40pxDefaultSize
+											__nextHasNoMarginBottom
+											label={ __( 'Symbol Position' ) }
+											value={ symbolPosition }
+											options={ [
+												{
+													label: __(
+														'Before number'
+													),
+													value: 'prefix',
+												},
+												{
+													label: __( 'After number' ),
+													value: 'suffix',
+												},
+											] }
+											onChange={ ( position ) =>
+												setAttributes( {
+													symbolPosition: position,
+												} )
+											}
+										/>
+									</ToolsPanelItem>
+								</>
+							) }
+						</>
+					) }
 				</ToolsPanel>
 				<PanelColorSettings
 					title={ __( 'Color Settings' ) }
