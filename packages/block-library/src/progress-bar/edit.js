@@ -35,6 +35,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		isReadProgress,
 		symbol,
 		symbolPosition,
+		showTotal,
+		seprator,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
@@ -58,6 +60,16 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
+	const formatValue = ( val ) => {
+		return symbolPosition === 'prefix'
+			? `${ symbol }${ val }`
+			: `${ val }${ symbol }`;
+	};
+
+	const valueDisplay = showTotal
+		? `${ formatValue( value ) } ${ seprator } ${ formatValue( max ) }`
+		: formatValue( value );
+
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
@@ -75,6 +87,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							isReadProgress: false,
 							symbol: '%',
 							symbolPosition: 'suffix',
+							showTotal: false,
+							seprator: '/',
 						} );
 					} }
 					dropdownMenuProps={ dropdownMenuProps }
@@ -152,6 +166,46 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					</ToolsPanelItem>
+					{ showValue && (
+						<ToolsPanelItem
+							label={ __( 'Show total value' ) }
+							isShownByDefault
+							hasValue={ () => showTotal }
+							onDeselect={ () =>
+								setAttributes( { showTotal: false } )
+							}
+						>
+							<ToggleControl
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
+								label={ __( 'Show total value' ) }
+								checked={ showTotal }
+								onChange={ () =>
+									setAttributes( { showTotal: ! showTotal } )
+								}
+							/>
+						</ToolsPanelItem>
+					) }
+					{ showValue && showTotal && (
+						<ToolsPanelItem
+							label={ __( 'Value Seprator' ) }
+							isShownByDefault
+							hasValue={ () => seprator !== '/' }
+							onDeselect={ () =>
+								setAttributes( { seprator: '/' } )
+							}
+						>
+							<TextControl
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
+								label={ __( 'Value Seprator' ) }
+								value={ seprator }
+								onChange={ ( newSeprator ) =>
+									setAttributes( { seprator: newSeprator } )
+								}
+							/>
+						</ToolsPanelItem>
+					) }
 					<ToolsPanelItem
 						label={ __( 'Use as read progress' ) }
 						isShownByDefault
@@ -251,13 +305,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 							placeholder={ __( 'Write heading…' ) }
 						/>
-						{ showValue && (
-							<p>
-								{ symbolPosition === 'prefix'
-									? `${ symbol }${ value }`
-									: `${ value }${ symbol }` }
-							</p>
-						) }
+						{ showValue && <p>{ valueDisplay }</p> }
 					</div>
 				) }
 				<div

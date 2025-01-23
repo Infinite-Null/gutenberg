@@ -46,6 +46,14 @@
 		"symbolPosition": {
 			"type": "string",
 			"default": "suffix"
+		},
+		"showTotal": {
+			"type": "boolean",
+			"default": false
+		},
+		"seprator": {
+			"type": "string",
+			"default": "/"
 		}
 	},
 	"supports": {

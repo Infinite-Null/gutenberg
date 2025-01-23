@@ -15,6 +15,8 @@ export default function Save( { attributes } ) {
 		isReadProgress,
 		symbol,
 		symbolPosition,
+		showTotal,
+		seprator,
 	} = attributes;
 
 	// eslint-disable-next-line react-compiler/react-compiler
@@ -37,6 +39,16 @@ export default function Save( { attributes } ) {
 		height: `${ height }px`,
 	};
 
+	const formatValue = ( val ) => {
+		return symbolPosition === 'prefix'
+			? `${ symbol }${ val }`
+			: `${ val }${ symbol }`;
+	};
+
+	const valueDisplay = showTotal
+		? `${ formatValue( value ) } ${ seprator } ${ formatValue( max ) }`
+		: formatValue( value );
+
 	return (
 		<div { ...blockProps }>
 			<div className="wp-block-progress-bar__container">
@@ -47,13 +59,7 @@ export default function Save( { attributes } ) {
 							className="wp-block-progress-bar__label"
 							value={ label }
 						/>
-						{ showValue && (
-							<p>
-								{ symbolPosition === 'prefix'
-									? `${ symbol }${ value }`
-									: `${ value }${ symbol }` }
-							</p>
-						) }
+						{ showValue && <p>{ valueDisplay }</p> }
 					</div>
 				) }
 				<div
