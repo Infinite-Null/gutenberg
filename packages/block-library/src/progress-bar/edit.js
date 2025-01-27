@@ -155,27 +155,30 @@ export default function Edit( { attributes, setAttributes } ) {
 									}
 								/>
 							</ToolsPanelItem>
-							<ToolsPanelItem
-								label={ __( 'Progress bar height' ) }
-								isShownByDefault
-								hasValue={ () => height !== 11 }
-								onDeselect={ () =>
-									setAttributes( { height: 11 } )
-								}
-							>
-								<RangeControl
-									__next40pxDefaultSize
-									__nextHasNoMarginBottom
-									label={ __( 'Progress bar height' ) }
-									help={ __( 'Height in pixels' ) }
-									value={ height }
-									onChange={ ( heightValue ) =>
-										setAttributes( { height: heightValue } )
-									}
-									min={ 1 }
-									max={ 30 }
-								/>
-							</ToolsPanelItem>
+						</>
+					) }
+					<ToolsPanelItem
+						label={ __( 'Bar height' ) }
+						isShownByDefault
+						hasValue={ () => height !== 11 }
+						onDeselect={ () => setAttributes( { height: 11 } ) }
+					>
+						<RangeControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={ __( 'Bar height' ) }
+							help={ __( 'Height in pixels' ) }
+							value={ height }
+							onChange={ ( heightValue ) =>
+								setAttributes( { height: heightValue } )
+							}
+							min={ 1 }
+							max={ 30 }
+						/>
+					</ToolsPanelItem>
+
+					{ ! isReadProgress && (
+						<>
 							<ToolsPanelItem
 								label={ __( 'Show value' ) }
 								isShownByDefault
