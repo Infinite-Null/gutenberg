@@ -34,24 +34,23 @@ import {
  *
  * @example
  * ```jsx
- * function SpacerBlock() {
+ * import { SpacingSizesControl } from '@wordpress/block-editor';
+ * import { useState } from '@wordpress/element';
+ *
+ * function Example() {
+ *   const [ sides, setSides ] = useState( {
+ *     top: '0px',
+ *     right: '0px',
+ *     bottom: '0px',
+ *     left: '0px',
+ *   } );
+ *
  *   return (
- *     <View className="tools-panel-item-spacing">
- *       <SpacingSizesControl
- *         values={ {
- *				top: '0px',
- *				right: '0px',
- *				bottom: '0px',
- *				left: '0px',
- *			} }
- *         onChange={handleOnChange}
- *         label="Height"
- *         units={units}
- *         allowReset={false}
- *         splitOnAxis={false}
- *         showSideInLabel={false}
- *       />
- *     </View>
+ *     <SpacingSizesControl
+ *       values={ sides }
+ *       onChange={ setSides }
+ *       label="Sides"
+ *     />
  *   );
  * }
  * ```

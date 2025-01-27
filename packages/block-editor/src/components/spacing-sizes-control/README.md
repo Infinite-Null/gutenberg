@@ -14,45 +14,26 @@ The SpacingSizesControl component is a flexible control that allows users to mod
 
 ## Usage
 
-```js
-import {
-	InspectorControls,
-	__experimentalSpacingSizesControl as SpacingSizesControl,
-} from '@wordpress/block-editor';
-import { View } from '@wordpress/primitives';
-import { useCustomUnits } from '@wordpress/components';
+```jsx
+import { SpacingSizesControl } from '@wordpress/block-editor';
+import { useState } from '@wordpress/element';
 
-const DimensionInput = ( { label, onChange, value = '' } ) => {
-	const availableUnits = [ 'px', 'em', 'rem', 'vw', 'vh' ];
-	const units = useCustomUnits( {
-		availableUnits,
-		defaultValues: { px: 100, em: 10, rem: 10, vw: 10, vh: 25 },
+function Example() {
+	const [ sides, setSides ] = useState( {
+		top: '0px',
+		right: '0px',
+		bottom: '0px',
+		left: '0px',
 	} );
 
-	const handleOnChange = ( { top, right, bottom, left } ) => {
-		onChange( { top, right, bottom, left } );
-	};
-
 	return (
-		<View className="tools-panel-item-spacing">
-			<SpacingSizesControl
-				values={ {
-					top: '0px',
-					right: '0px',
-					bottom: '0px',
-					left: '0px',
-				} }
-				onChange={ handleOnChange }
-				label={ label }
-				sides={ [ 'all' ] }
-				units={ units }
-				allowReset={ false }
-				splitOnAxis={ false }
-				showSideInLabel={ false }
-			/>
-		</View>
+		<SpacingSizesControl
+			values={ sides }
+			onChange={ setSides }
+			label="Sides"
+		/>
 	);
-};
+}
 ```
 
 ## Props
