@@ -1,21 +1,15 @@
 # Spacing Sizes Control
 
-The SpacingSizesControl component provides a user interface for controlling spacing values in blocks. It supports single, axial, and separated input controls for different spacing configurations.
+The SpacingSizesControl component provides a flexible user interface for controlling spacing values in blocks, allowing users to modify values for different sides. It supports three viewing modes:
 
-## Description
-
-The SpacingSizesControl component is a flexible control that allows users to modify spacing values for different sides of a block. It supports three viewing modes:
-
-1. Single: Control one side at a time
-2. Axial: Control horizontal and vertical sides together
-3. Custom: Control each side separately
-
-![Spacing Sizes Control](https://i.postimg.cc/3RkzzfL6/Screenshot-2025-01-10-at-8-07-55-AM.png)
+1. Single: Control one side at a time.
+2. Axial: Control horizontal and vertical sides together.
+3. Custom: Control each side separately.
 
 ## Usage
 
 ```jsx
-import { SpacingSizesControl } from '@wordpress/block-editor';
+import { __experimentalSpacingSizesControl as SpacingSizesControl } from '@wordpress/block-editor';
 import { useState } from '@wordpress/element';
 
 function Example() {
@@ -48,7 +42,7 @@ function Example() {
 
 -   Type: `String`
 -   Required: Yes
--   Description: Label for the control (e.g., "Height").
+-   Description: Label for the control.
 
 ### `minimumCustomValue`
 

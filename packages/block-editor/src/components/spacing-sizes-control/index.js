@@ -34,7 +34,7 @@ import {
  *
  * @example
  * ```jsx
- * import { SpacingSizesControl } from '@wordpress/block-editor';
+ * import { __experimentalSpacingSizesControl as SpacingSizesControl } from '@wordpress/block-editor';
  * import { useState } from '@wordpress/element';
  *
  * function Example() {
