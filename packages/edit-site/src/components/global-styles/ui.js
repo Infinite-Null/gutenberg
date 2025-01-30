@@ -258,19 +258,8 @@ function GlobalStylesEditorCanvasContainerLink() {
 			unlock( select( editSiteStore ) ).getEditorCanvasContainerView(),
 		[]
 	);
-	const { path } = location;
+	const path = location?.path;
 	const isRevisionsOpen = path === '/revisions';
-	const { setEditorCanvasContainerView } = unlock(
-		useDispatch( editSiteStore )
-	);
-	const previousPath = usePrevious( path );
-
-	// Reset editorCanvasContainerView when navigating away from '/css'
-	useEffect( () => {
-		if ( previousPath === '/css' && path !== '/css' ) {
-			setEditorCanvasContainerView( undefined );
-		}
-	}, [ path, previousPath, setEditorCanvasContainerView ] );
 
 	// If the user switches the editor canvas container view, redirect
 	// to the appropriate screen. This effectively allows deep linking to the
