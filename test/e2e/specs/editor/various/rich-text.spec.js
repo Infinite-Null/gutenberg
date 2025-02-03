@@ -18,10 +18,10 @@ test.describe( 'RichText (@firefox, @webkit)', () => {
 			.locator( 'role=textbox[name="Site title text"]' )
 			.click();
 
-		const multiLineContent = 'First<br/>Second<br/>Third';
+		const multiLineContent = 'First\nSecond\nThird';
 		pageUtils.setClipboardData( {
 			plainText: multiLineContent,
-			html: multiLineContent.replace( /\n/g, '<br>' ),
+			html: multiLineContent.replace( /\n/g, '<br/>' ),
 		} );
 
 		await pageUtils.pressKeys( 'primary+a' );
@@ -42,10 +42,10 @@ test.describe( 'RichText (@firefox, @webkit)', () => {
 			.locator( 'role=button[name="Add default block"i]' )
 			.click();
 
-		const multiLineContent = 'First<br/>Second<br/>Third';
+		const multiLineContent = 'First\nSecond\nThird';
 		pageUtils.setClipboardData( {
 			plainText: multiLineContent,
-			html: multiLineContent.replace( /\n/g, '<br>' ),
+			html: multiLineContent.replace( /\n/g, '<br/>' ),
 		} );
 
 		await pageUtils.pressKeys( 'primary+a' );
