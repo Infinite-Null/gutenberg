@@ -127,9 +127,7 @@ export const installBlockType =
 				.select( blocksStore )
 				.getBlockTypes();
 			if ( ! registeredBlocks.some( ( i ) => i.name === name ) ) {
-				throw new Error(
-					__( 'Error registering block. Try reloading the page.' )
-				);
+				throw new Error( __( 'Error registering block.' ) );
 			}
 
 			registry.dispatch( noticesStore ).createInfoNotice(
