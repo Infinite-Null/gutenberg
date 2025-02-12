@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Internal
+
+- `NumberControl`: Fix invalid HTML attributes for infinite bounds ([#69033](https://github.com/WordPress/gutenberg/pull/69033)).
+
 ## 29.3.0 (2025-01-29)
 
 ### Enhancements
