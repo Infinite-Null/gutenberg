@@ -1,11 +1,16 @@
 /**
  * WordPress dependencies
  */
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
+import { useDispatch, useSelect, useRegistry, select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { store as editorStore } from '@wordpress/editor';
 import { useLayoutEffect } from '@wordpress/element';
 import { store as preferencesStore } from '@wordpress/preferences';
+
+/**
+ * Internal dependencies
+ */
+import { unlock } from '../../lock-unlock';
 
 export function useAdaptEditorToCanvas( canvas ) {
 	const { clearSelectedBlock } = useDispatch( blockEditorStore );
@@ -17,6 +22,8 @@ export function useAdaptEditorToCanvas( canvas ) {
 	} = useDispatch( editorStore );
 	const { get: getPreference } = useSelect( preferencesStore );
 	const registry = useRegistry();
+	const { resetZoomLevel } = unlock( useDispatch( blockEditorStore ) );
+	const { isZoomOut } = unlock( select( blockEditorStore ) );
 	useLayoutEffect( () => {
 		const isMediumOrBigger =
 			window.matchMedia( '(min-width: 782px)' ).matches;
@@ -39,6 +46,10 @@ export function useAdaptEditorToCanvas( canvas ) {
 			} else {
 				setIsListViewOpened( false );
 			}
+
+			if ( isMediumOrBigger && isZoomOut() ) {
+				resetZoomLevel();
+			}
 		} );
 	}, [
 		canvas,
@@ -49,5 +60,7 @@ export function useAdaptEditorToCanvas( canvas ) {
 		setIsInserterOpened,
 		setIsListViewOpened,
 		getPreference,
+		resetZoomLevel,
+		isZoomOut,
 	] );
 }

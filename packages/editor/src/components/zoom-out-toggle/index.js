@@ -80,12 +80,6 @@ const ZoomOutToggle = ( { disabled } ) => {
 		}
 	};
 
-	useEffect( () => {
-		return () => {
-			resetZoomLevel();
-		};
-	}, [ resetZoomLevel ] );
-
 	return (
 		<Button
 			accessibleWhenDisabled
