@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useDispatch, useSelect, useRegistry, select } from '@wordpress/data';
+import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { store as editorStore } from '@wordpress/editor';
 import { useLayoutEffect } from '@wordpress/element';
@@ -13,7 +13,10 @@ import { store as preferencesStore } from '@wordpress/preferences';
 import { unlock } from '../../lock-unlock';
 
 export function useAdaptEditorToCanvas( canvas ) {
-	const { clearSelectedBlock } = useDispatch( blockEditorStore );
+	const { clearSelectedBlock, resetZoomLevel } = unlock(
+		useDispatch( blockEditorStore )
+	);
+	const { isZoomOut } = unlock( useSelect( blockEditorStore ) );
 	const {
 		setDeviceType,
 		closePublishSidebar,
@@ -22,8 +25,6 @@ export function useAdaptEditorToCanvas( canvas ) {
 	} = useDispatch( editorStore );
 	const { get: getPreference } = useSelect( preferencesStore );
 	const registry = useRegistry();
-	const { resetZoomLevel } = unlock( useDispatch( blockEditorStore ) );
-	const { isZoomOut } = unlock( select( blockEditorStore ) );
 	useLayoutEffect( () => {
 		const isMediumOrBigger =
 			window.matchMedia( '(min-width: 782px)' ).matches;
