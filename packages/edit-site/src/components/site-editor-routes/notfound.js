@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { Notice } from '@wordpress/components';
 import SidebarNavigationScreenMain from '../sidebar-navigation-screen-main';
 
 export const notFoundRoute = {
@@ -15,13 +16,25 @@ export const notFoundRoute = {
 		sidebar: <SidebarNavigationScreenMain />,
 		mobile: (
 			<SidebarNavigationScreenMain
-				customDescription={ __( '404 (Not Found)' ) }
+				customDescription={
+					<Notice
+						status="error"
+						isDismissible={ false }
+						className="edit-site-layout__area__404"
+					>
+						{ __( 'Page not found' ) }
+					</Notice>
+				}
 			/>
 		),
 		content: (
-			<p className="edit-site-layout__area__404">
-				{ __( '404 (Not Found)' ) }
-			</p>
+			<Notice
+				status="error"
+				isDismissible={ false }
+				className="edit-site-layout__area__404"
+			>
+				{ __( 'Page not found' ) }
+			</Notice>
 		),
 	},
 };
