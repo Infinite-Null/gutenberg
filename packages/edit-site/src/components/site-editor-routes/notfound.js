@@ -22,7 +22,9 @@ export const notFoundRoute = {
 						isDismissible={ false }
 						className="edit-site-layout__area__404"
 					>
-						{ __( 'Page not found' ) }
+						{ __(
+							'The requested page could not be found. Please check the URL.'
+						) }
 					</Notice>
 				}
 			/>
@@ -33,7 +35,9 @@ export const notFoundRoute = {
 				isDismissible={ false }
 				className="edit-site-layout__area__404"
 			>
-				{ __( 'Page not found' ) }
+				{ __(
+					'The requested page could not be found. Please check the URL.'
+				) }
 			</Notice>
 		),
 	},
