@@ -6,8 +6,18 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Notice } from '@wordpress/components';
+import { Notice, __experimentalSpacer as Spacer } from '@wordpress/components';
 import SidebarNavigationScreenMain from '../sidebar-navigation-screen-main';
+
+function NotFoundError() {
+	return (
+		<Notice status="error" isDismissible={ false }>
+			{ __(
+				'The requested page could not be found. Please check the URL.'
+			) }
+		</Notice>
+	);
+}
 
 export const notFoundRoute = {
 	name: 'notfound',
@@ -16,29 +26,13 @@ export const notFoundRoute = {
 		sidebar: <SidebarNavigationScreenMain />,
 		mobile: (
 			<SidebarNavigationScreenMain
-				customDescription={
-					<Notice
-						status="error"
-						isDismissible={ false }
-						className="edit-site-layout__area__404"
-					>
-						{ __(
-							'The requested page could not be found. Please check the URL.'
-						) }
-					</Notice>
-				}
+				customDescription={ <NotFoundError /> }
 			/>
 		),
 		content: (
-			<Notice
-				status="error"
-				isDismissible={ false }
-				className="edit-site-layout__area__404"
-			>
-				{ __(
-					'The requested page could not be found. Please check the URL.'
-				) }
-			</Notice>
+			<Spacer padding={ 2 }>
+				<NotFoundError />
+			</Spacer>
 		),
 	},
 };
