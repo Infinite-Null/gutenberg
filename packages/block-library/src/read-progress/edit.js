@@ -37,7 +37,7 @@ export default function ReadMore( { attributes, setAttributes } ) {
 		transformOrigin: isInverted ? '100% 50%' : '0 50%',
 	};
 
-	if ( position === 'top' ) {
+	if ( position === 'bottom' ) {
 		readProgressStyle.top = 'auto';
 		progressStyle.top = 'auto';
 		readProgressStyle.bottom = 0;
