@@ -4,8 +4,8 @@
 import {
 	setDefaultBlockName,
 	setFreeformContentHandlerName,
-	setUnregisteredTypeHandlerName,
 	setGroupingBlockName,
+	setUnregisteredTypeHandlerName,
 } from '@wordpress/blocks';
 
 /**
@@ -25,17 +25,16 @@ import * as accordionContent from './accordion-content';
 import * as accordionHeader from './accordion-header';
 import * as accordionPanel from './accordion-panel';
 import * as archives from './archives';
-import * as avatar from './avatar';
 import * as audio from './audio';
+import * as avatar from './avatar';
+import * as reusableBlock from './block';
 import * as button from './button';
 import * as buttons from './buttons';
 import * as calendar from './calendar';
 import * as categories from './categories';
-import * as classic from './freeform';
 import * as code from './code';
 import * as column from './column';
 import * as columns from './columns';
-import * as comments from './comments';
 import * as commentAuthorAvatar from './comment-author-avatar';
 import * as commentAuthorName from './comment-author-name';
 import * as commentContent from './comment-content';
@@ -43,19 +42,22 @@ import * as commentDate from './comment-date';
 import * as commentEditLink from './comment-edit-link';
 import * as commentReplyLink from './comment-reply-link';
 import * as commentTemplate from './comment-template';
-import * as commentsPaginationPrevious from './comments-pagination-previous';
+import * as comments from './comments';
 import * as commentsPagination from './comments-pagination';
 import * as commentsPaginationNext from './comments-pagination-next';
 import * as commentsPaginationNumbers from './comments-pagination-numbers';
+import * as commentsPaginationPrevious from './comments-pagination-previous';
 import * as commentsTitle from './comments-title';
 import * as cover from './cover';
 import * as details from './details';
 import * as embed from './embed';
 import * as file from './file';
+import * as footnotes from './footnotes';
 import * as form from './form';
 import * as formInput from './form-input';
-import * as formSubmitButton from './form-submit-button';
 import * as formSubmissionNotification from './form-submission-notification';
+import * as formSubmitButton from './form-submit-button';
+import * as classic from './freeform';
 import * as gallery from './gallery';
 import * as group from './group';
 import * as heading from './heading';
@@ -74,13 +76,13 @@ import * as navigation from './navigation';
 import * as navigationLink from './navigation-link';
 import * as navigationSubmenu from './navigation-submenu';
 import * as nextpage from './nextpage';
-import * as pattern from './pattern';
 import * as pageList from './page-list';
 import * as pageListItem from './page-list-item';
 import * as paragraph from './paragraph';
+import * as pattern from './pattern';
 import * as postAuthor from './post-author';
-import * as postAuthorName from './post-author-name';
 import * as postAuthorBiography from './post-author-biography';
+import * as postAuthorName from './post-author-name';
 import * as postComment from './post-comment';
 import * as postCommentsCount from './post-comments-count';
 import * as postCommentsForm from './post-comments-form';
@@ -105,8 +107,8 @@ import * as queryPaginationPrevious from './query-pagination-previous';
 import * as queryTitle from './query-title';
 import * as queryTotal from './query-total';
 import * as quote from './quote';
-import * as reusableBlock from './block';
 import * as readMore from './read-more';
+import * as readProgress from './read-progress';
 import * as rss from './rss';
 import * as search from './search';
 import * as separator from './separator';
@@ -127,7 +129,6 @@ import * as termTemplate from './term-template';
 import * as textColumns from './text-columns';
 import * as verse from './verse';
 import * as video from './video';
-import * as footnotes from './footnotes';
 
 import isBlockMetadataExperimental from './utils/is-block-metadata-experimental';
 
@@ -220,6 +221,7 @@ const getAllBlocks = () => {
 		queryNoResults,
 		queryTotal,
 		readMore,
+		readProgress,
 		comments,
 		commentAuthorName,
 		commentContent,
